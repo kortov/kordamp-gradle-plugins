@@ -32,6 +32,7 @@ import org.gradle.api.tasks.options.Option
 class InitPmdTask extends DefaultTask {
     @Input
     final Property<Boolean> overwrite = project.objects.property(Boolean).convention(false)
+    String fileSeparator = File.separator
 
     @Option(option = 'overwrite', description = 'Overwrite existing configuration file')
     void setOverwrite(boolean overwrite) {
@@ -41,7 +42,7 @@ class InitPmdTask extends DefaultTask {
     @TaskAction
     void init() {
         String baseName = project == project.rootProject ? 'pmd' : project.name
-        File file = project.rootProject.file("config/pmd/${baseName}.xml")
+        File file = project.rootProject.file("config${fileSeparator}pmd${fileSeparator}${baseName}.xml")
 
         if (file.exists() && !overwrite.getOrElse(false)) {
             println "Pmd config file ${file.absolutePath} already exists. Invoke this task with --overwrite if you want to replace it."

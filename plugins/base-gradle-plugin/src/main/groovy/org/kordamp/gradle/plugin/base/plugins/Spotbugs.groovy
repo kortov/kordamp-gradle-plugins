@@ -38,6 +38,7 @@ class Spotbugs extends AbstractQualityFeature {
     String effort = 'max'
     String reportLevel = 'high'
     String report = 'html'
+    String fileSeparator = File.separator
     List<String> visitors = []
     List<String> omitVisitors = []
     List<String> extraArgs = []
@@ -74,23 +75,23 @@ class Spotbugs extends AbstractQualityFeature {
     @Override
     void normalize() {
         if (null == includeFilterFile) {
-            File file = project.rootProject.file("config/spotbugs/${project.name}-includeFilter.xml")
+            File file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}${project.name}-includeFilter.xml")
             if (!file.exists()) {
-                file = project.rootProject.file('config/spotbugs/includeFilter.xml')
+                file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}includeFilter.xml")
             }
             includeFilterFile = file
         }
         if (null == excludeFilterFile) {
-            File file = project.rootProject.file("config/spotbugs/${project.name}-excludeFilter.xml")
+            File file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}${project.name}-excludeFilter.xml")
             if (!file.exists()) {
-                file = project.rootProject.file('config/spotbugs/excludeFilter.xml')
+                file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}excludeFilter.xml")
             }
             excludeFilterFile = file
         }
         if (null == excludeBugsFilterFile) {
-            File file = project.rootProject.file("config/spotbugs/${project.name}-excludeBugsFilter.xml")
+            File file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}${project.name}-excludeBugsFilter.xml")
             if (!file.exists()) {
-                file = project.rootProject.file('config/spotbugs/excludeBugsFilter.xml')
+                file = project.rootProject.file("config${fileSeparator}spotbugs${fileSeparator}excludeBugsFilter.xml")
             }
             excludeBugsFilterFile = file
         }

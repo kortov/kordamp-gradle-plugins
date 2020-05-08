@@ -53,6 +53,7 @@ class GroovydocPlugin extends AbstractKordampPlugin {
     static final String GROOVYDOC_JAR_TASK_NAME = 'groovydocJar'
     static final String AGGREGATE_GROOVYDOC_TASK_NAME = 'aggregateGroovydoc'
     static final String AGGREGATE_GROOVYDOC_JAR_TASK_NAME = 'aggregateGroovydocJar'
+    String fileSeparator = File.separator
 
     Project project
 
@@ -223,7 +224,7 @@ class GroovydocPlugin extends AbstractKordampPlugin {
                     t.enabled = false
                     t.group = JavaBasePlugin.DOCUMENTATION_GROUP
                     t.description = 'Aggregates Groovydoc API docs for all projects.'
-                    t.destinationDir = project.file("${project.buildDir}/docs/aggregate-groovydoc")
+                    t.destinationDir = project.file("${project.buildDir}${fileSeparator}docs${fileSeparator}aggregate-groovydoc")
                     config.docs.groovydoc.applyTo(t)
                     t.footer = "Copyright &copy; ${config.info.copyrightYear} ${config.info.getAuthors().join(', ')}. All rights reserved."
                 }
